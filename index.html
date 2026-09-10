@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAROJ • Free Fire Spam API</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Inter,system-ui,sans-serif;
+    min-height:100vh;color:#f5f7ff;
+    background:
+      radial-gradient(circle at 15% 10%,rgba(124,58,237,.25),transparent 30%),
+      radial-gradient(circle at 85% 85%,rgba(6,182,212,.18),transparent 30%),
+      #070912;
+}
+.container{width:min(920px,92%);margin:auto;padding:45px 0 25px}
+.hero{text-align:center;margin-bottom:28px}
+.badge{display:inline-block;padding:7px 13px;border:1px solid rgba(139,92,246,.4);border-radius:30px;background:rgba(124,58,237,.1);font-size:12px;color:#c4b5fd;margin-bottom:15px}
+h1{font-size:clamp(32px,7vw,58px);font-weight:800;letter-spacing:-2px}
+h1 span{background:linear-gradient(90deg,#a78bfa,#22d3ee);-webkit-background-clip:text;color:transparent}
+.hero p{color:#9ca3b5;margin-top:10px;font-size:14px}
+.card{
+    background:rgba(15,18,32,.78);border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.35);
+    backdrop-filter:blur(15px)
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-size:12px;font-weight:700;color:#aeb5c7;margin:0 0 8px}
+input,select{
+    width:100%;height:52px;border-radius:13px;border:1px solid #292e40;
+    background:#0a0d18;color:#fff;padding:0 15px;outline:none;font-size:14px;
+    transition:.2s
+}
+input:focus,select:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.12)}
+button{
+    width:100%;height:53px;margin-top:18px;border:0;border-radius:13px;
+    background:linear-gradient(90deg,#7c3aed,#0891b2);color:#fff;font-weight:800;
+    cursor:pointer;font-size:14px;transition:.2s
+}
+button:hover{transform:translateY(-1px);filter:brightness(1.1)}
+button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.status{min-height:22px;text-align:center;margin:14px 0 0;font-size:13px;color:#9ca3b5}
+.response-head{display:flex;justify-content:space-between;align-items:center;margin:25px 0 10px}
+.response-head h2{font-size:15px}
+.copy{
+    width:auto;height:auto;margin:0;padding:7px 11px;border-radius:9px;
+    background:#171b2b;border:1px solid #292e40;font-size:11px
+}
+pre{
+    min-height:230px;max-height:470px;overflow:auto;white-space:pre-wrap;word-break:break-word;
+    background:#050711;border:1px solid #222738;border-radius:15px;padding:17px;
+    color:#b8c7e6;font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace
+}
+.footer{text-align:center;padding:22px 0 5px;color:#6f778a;font-size:11px}
+.socials{display:flex;justify-content:center;gap:10px;margin-bottom:12px}
+.social{
+    width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+    color:#fff;text-decoration:none;background:#121626;border:1px solid #282d3f;
+    transition:.2s
+}
+.social:hover{transform:translateY(-2px);border-color:#7c3aed}
+.social svg{width:19px;height:19px;fill:currentColor}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.container{padding-top:30px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <div class="badge">⚡ FAST • SECURE • API POWERED</div>
+    <h1><span>SAROJ</span> SPAM API</h1>
+    <p>Free Fire UID request panel with live API response</p>
+  </header>
+
+  <main class="card">
+    <form id="spamForm">
+      <div class="grid">
+        <div>
+          <label for="uid">PLAYER UID</label>
+          <input id="uid" name="uid" type="text" inputmode="numeric" placeholder="Enter any UID" autocomplete="off" required>
+        </div>
+        <div>
+          <label for="server">SERVER</label>
+          <select id="server" name="server_name">
+            <option value="ind">🇮🇳 India (IND)</option>
+            <option value="bd">🇧🇩 Bangladesh (BD)</option>
+            <option value="br">🇧🇷 Brazil (BR)</option>
+            <option value="sg">🇸🇬 Singapore (SG)</option>
+            <option value="id">🇮🇩 Indonesia (ID)</option>
+            <option value="pk">🇵🇰 Pakistan (PK)</option>
+            <option value="me">🌍 Middle East (ME)</option>
+            <option value="us">🇺🇸 United States (US)</option>
+          </select>
+        </div>
+      </div>
+      <button id="submitBtn" type="submit">🚀 SEND REQUEST</button>
+      <div class="status" id="status"></div>
+    </form>
+
+    <div class="response-head">
+      <h2>FULL API RESPONSE</h2>
+      <button class="copy" id="copyBtn" type="button">COPY</button>
+    </div>
+    <pre id="response">{ "status": "Waiting for request..." }</pre>
+  </main>
+
+  <footer class="footer">
+    <div class="socials">
+      <a class="social" href="https://www.instagram.com/it.s_2223?igsh=MW0zNDRtamFza2lncA==" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.25-3.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+      </a>
+      <a class="social" href="https://youtube.com/@sarojlikes?si=IU5FiGlfBsxSDtug/" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.8V8.2l6.5 3.8-6.5 3.8z"/></svg>
+      </a>
+    </div>
+    © 2026 SAROJ WEBSITE HUB • All Rights Reserved<br>Designed & Developed by 𝗦𝗔𝗥𝗢𝗝
+  </footer>
+</div>
+
+<script>
+const form = document.getElementById("spamForm");
+const uid = document.getElementById("uid");
+const server = document.getElementById("server");
+const responseBox = document.getElementById("response");
+const statusBox = document.getElementById("status");
+const submitBtn = document.getElementById("submitBtn");
+const copyBtn = document.getElementById("copyBtn");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const value = uid.value.trim();
+  if (!value) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "⏳ PROCESSING...";
+  statusBox.textContent = "Sending request...";
+  responseBox.textContent = "Loading API response...";
+
+  try {
+    const res = await fetch(`/api/spam?uid=${encodeURIComponent(value)}&server_name=${encodeURIComponent(server.value)}`);
+    const text = await res.text();
+    let output;
+    try {
+      output = JSON.stringify(JSON.parse(text), null, 2);
+    } catch {
+      output = text;
+    }
+    responseBox.textContent = output;
+    statusBox.textContent = res.ok ? "✓ Response received" : `API returned HTTP ${res.status}`;
+  } catch (err) {
+    responseBox.textContent = JSON.stringify({error: err.message}, null, 2);
+    statusBox.textContent = "Request failed";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "🚀 SEND REQUEST";
+  }
+});
+
+copyBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(responseBox.textContent);
+    copyBtn.textContent = "COPIED";
+    setTimeout(() => copyBtn.textContent = "COPY", 1200);
+  } catch {
+    copyBtn.textContent = "FAILED";
+    setTimeout(() => copyBtn.textContent = "COPY", 1200);
+  }
+});
+</script>
+</body>
+</html>
